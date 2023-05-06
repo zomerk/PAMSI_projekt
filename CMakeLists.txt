@@ -3,8 +3,8 @@ project(PAMSI_projekt)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp)
-add_executable(PAMSI_projekt ${SOURCE_FILES})
+set(SOURCE_FILES main.cpp Object.h Object.cpp Window.h Window.cpp)
+add_executable(PAMSI_projekt ${SOURCE_FILES} Object.h Object.cpp)
 include_directories(/usr/local/include)
 
 find_package(SFML 2.5 COMPONENTS system window graphics network audio REQUIRED)
