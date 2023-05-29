@@ -4,7 +4,7 @@
 int main()
 {
     // Ustawienia okna
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Odbijająca się kulka");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Kulka spadajaca pionowo");
     window.setFramerateLimit(60);
 
     // Ustawienia kulki
