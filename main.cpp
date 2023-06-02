@@ -6,9 +6,9 @@
 int main()
 {
     int a;
-    std::cin >> a;
     while(a!=9)
     {    
+        std::cin >> a;
         switch(a) 
         {
             case 1:
