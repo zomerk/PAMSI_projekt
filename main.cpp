@@ -5,24 +5,34 @@
 #include "funkcje.h"
 int main()
 {
-    int a;
-    while(a!=9)
+    char a;
+
+    cout<<"Witaj oto program silnik fizyczny czy cos xd..."<<endl;
+    
+    while(a!='z')
     {    
-        std::cin >> a;
+        cout<<"Menu"<<endl;
+        cout<<"1 - Zderzenia"<<endl;
+        cout<<"2 - Odbicia pilki z uwzglednieneim grawitacji"<<endl;
+        cout<<"3 - Spadek pionowy"<<endl;
+        cout<<"z - zamkij"<<endl;
+        cout<<"Twoj wybor: ";
+        std::cin >> a; 
+        cout<<endl;
         switch(a) 
         {
-            case 1:
+            case '1':
             {
                 Window okno;
                 okno.Action_Loop(500);
                 break;
             }
-            case 2:
+            case '2':
             {
                 odbijanie();
                 break;
             }
-            case 3:
+            case '3':
             {
                 spadanie_pionowe();
                 break;
@@ -30,3 +40,4 @@ int main()
         }
     }
 }
+
