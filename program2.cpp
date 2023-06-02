@@ -82,6 +82,8 @@ void spadanie_pionowe()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            else if(event.type==sf::Event::KeyPressed && event.key.code==sf::Keyboard::Enter)
+                window.close();
             else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left)
             {
                 sf::Vector2f mousePosition = window.mapPixelToCoords(sf::Mouse::getPosition(window));
