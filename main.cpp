@@ -7,22 +7,26 @@ int main()
 {
     int a;
     std::cin >> a;
-    switch(a) {
-        case 1:
+    while(a!=9)
+    {    
+        switch(a) 
+        {
+            case 1:
             {
-            Window okno;
-            okno.Action_Loop(500);
-            break;
+                Window okno;
+                okno.Action_Loop(500);
+                break;
             }
-       case 2:
+            case 2:
             {
-              odbijanie();
-              break;
+                odbijanie();
+                break;
             }
-       case 3:
+            case 3:
             {
-              spadanie_pionowe();
-              break;
+                spadanie_pionowe();
+                break;
             }
+        }
     }
 }
