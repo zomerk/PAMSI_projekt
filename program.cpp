@@ -110,15 +110,9 @@ void odbijanie()
                     isDragging = false;
                 }
             }
-
-        
-
-
         }
 
         // Aktualizacja pozycji kulki
-
-
          if (isDragging)
         {
             poczatek=sf::Mouse::getPosition(window).x;
@@ -140,15 +134,11 @@ void odbijanie()
         // Odbicie od ścian okna
         if (position.x > 740)
         { 
-            //position.x=740;
             velocity.x = -velocity.x;
-            //velocity.x *= 0.8; // Wytracanie prędkości
         }
         if (position.x < 0)
-        { 
-            //position.x=0;
+        {
             velocity.x = -velocity.x;
-            //velocity.x *= 0.8; // Wytracanie prędkości
         }
         if (position.y > 530)
         {
