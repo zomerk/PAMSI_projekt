@@ -87,8 +87,8 @@ void odbijanie()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
-
-
+            else if(event.type==sf::Event::KeyPressed && event.key.code==sf::Keyboard::Enter)
+                window.close();
 
             if (event.type == sf::Event::MouseButtonPressed)
             {
