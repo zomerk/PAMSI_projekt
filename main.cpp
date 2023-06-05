@@ -37,6 +37,11 @@ int main()
                 spadanie_pionowe();
                 break;
             }
+            case '4':
+            {
+                sznur();
+                break;
+            }
         }
     }
 }

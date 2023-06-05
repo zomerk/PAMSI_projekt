@@ -8,5 +8,6 @@ using namespace std;
 
 void odbijanie();
 void spadanie_pionowe();
+void sznur();
 
 #endif
