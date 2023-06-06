@@ -3,8 +3,8 @@
 
 const float PI = 3.14159265f;
 const float maxDeflectionAngle = PI / 6.0f;  // Maksymalny kąt odkształcenia w radianach
-const float frictionFactor = 0.001f;         // Współczynnik tarcia dla ruchu sznura
-const float tensionFactor = 0.002f;          // Współczynnik naprężenia dla ruchu sznura
+const float frictionFactor = 0.01f;         // Współczynnik tarcia dla ruchu sznura
+const float tensionFactor = 0.02f;          // Współczynnik naprężenia dla ruchu sznura
 const float restoringForce = 0.03f;          // Siła powodująca powrot do pozycji początkowej sznura
 
 float clamp(float value, float min, float max)
@@ -19,14 +19,13 @@ float clamp(float value, float min, float max)
 
 int main()
 {
+    
+    sf::RenderWindow window(sf::VideoMode(1500, 1000), "Deflecting Rope");
 
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Deflecting Rope");
-
-    // Definicja ilosci segmentów sznura
     const int numSegments = 20;
     const int numNodes = numSegments + 1;
 
-    // Definicja "nodes"
+
     sf::CircleShape nodes[numNodes];
     sf::Vector2f originalPositions[numNodes];
     bool isNodeNearLimit[numNodes] = { false };  // Sprawdza czy node nie osiągnął limitu odkształcenia
@@ -35,14 +34,14 @@ int main()
 
     for (int i = 0; i < numNodes; ++i)
     {
-        nodes[i].setRadius(10.f);
+        nodes[i].setRadius(30.f);
         nodes[i].setFillColor(nodeColor);
         nodes[i].setOrigin(nodes[i].getRadius(), nodes[i].getRadius());
-        nodes[i].setPosition(window.getSize().x / 2.f - 200.f + i * 20.f, window.getSize().y / 2.f);
+        nodes[i].setPosition(window.getSize().x / 4.f - 400.f + i * 40.f, window.getSize().y / 2.f);
         originalPositions[i] = nodes[i].getPosition();
     }
 
-    // definicja rode'ów
+
     sf::VertexArray rodes(sf::Lines, numSegments * 2);
     for (int i = 0; i < numSegments; ++i)
     {
@@ -50,16 +49,16 @@ int main()
         rodes[i * 2 + 1].color = rodeColor;
     }
 
-    // Definicja obciążenia
-    sf::CircleShape object(20.f);
+
+    sf::CircleShape object(60.f);
     object.setFillColor(sf::Color::Blue);
     object.setOrigin(object.getRadius(), object.getRadius());
     object.setPosition(window.getSize().x / 2.f, window.getSize().y / 2.f - 200.f);
 
-    // Promień polizji
-    float collisionRadius = 30.f;
 
-    // Współczynnik odkształcenia
+    float collisionRadius = 40.f;
+
+
     const float deflectionFactor = 0.01f;
 
     
@@ -72,11 +71,11 @@ int main()
                 window.close();
         }
 
-   
+        // Zaktualizuj pozycję obciązenia używając kursora
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
         object.setPosition(mousePosition);
 
-
+        // Liczba nodów, które mają mić kontakt z obciążeniem
         int numNodesToAffect = std::round(object.getRadius() / 10.f); 
 
         // Kolizja pomiędzy obiektem a nodem
@@ -102,7 +101,7 @@ int main()
                 deflectionVector *= deflectionAngle * collisionRadius;
 
                 // dodanie naprężenia i tarcia
-                deflectionVector *= (1.0f - frictionFactor);
+                deflectionVector *= (10.0f - frictionFactor);
                 deflectionVector += (nodes[i].getPosition() - nodes[i - 1].getPosition()) * tensionFactor;
                 deflectionVector -= (nodes[i].getPosition() - nodes[i + 1].getPosition()) * tensionFactor;
 
@@ -138,6 +137,7 @@ int main()
                 sf::Vector2f restoringVector = originalPositions[i] - nodes[i].getPosition();
                 nodes[i].setPosition(nodes[i].getPosition() + restoringVector * restoringForce);
 
+                // reset kolorów
                 if (isNodeNearLimit[i])
                 {
                     isNodeNearLimit[i] = false;
@@ -148,7 +148,7 @@ int main()
             }
         }
 
-      
+        // Aktualizacja
         for (int i = 0; i < numSegments; ++i)
         {
             rodes[i * 2].position = nodes[i].getPosition();
